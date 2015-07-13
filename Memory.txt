@@ -1,25 +1,44 @@
 # implementation of card game - Memory
-# run on the http://www.codeskulptor.org/
-
 
 import simplegui
 import random
-
+card=[]
+expose=[]
+state=0
 # helper function to initialize globals
 def new_game():
-    pass  
 
-     
+    for i in range(8):
+        card.append(i)
+        card.append(i)
+        expose.append(False)
+        expose.append(False)
+        random.shuffle(card)
+    pass
+
+
 # define event handlers
 def mouseclick(pos):
     # add game state logic here
-    pass
-    
-                        
-# cards are logically 50x100 pixels in size    
-def draw(canvas):
+    global state
+    for i in range(16):
+        if pos[0] < (i+1)*50:break
+    expose[i]=True
     pass
 
+
+# cards are logically 50x100 pixels in size
+def draw(canvas):
+    a=0
+    for i in card:
+        canvas.draw_text(str(i),[10+a*50,70],60,'white')
+        a+=1
+    for i in range(16):
+        if not expose[i]:
+            canvas.draw_polygon([[0+i*50, 0], 
+                                [50+i*50, 0], 
+                                [50+i*50, 100], 
+                                [0+i*50, 100]], 2, 'red', 'green')
 
 # create frame and add a button and labels
 frame = simplegui.create_frame("Memory", 800, 100)
