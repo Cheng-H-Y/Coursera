@@ -56,27 +56,24 @@ def mouseclick(pos):
 def draw(canvas):
     a=0
     for i in card:
-        canvas.draw_text(str(i),[10+a*50,70],60,'white')
+        canvas.draw_text(str(i),[10+a*50,70],60,'black')
         a+=1
     for i in range(16):
         if not expose[i]:
-            canvas.draw_polygon([[0+i*50, 0], 
-                                [50+i*50, 0], 
-                                [50+i*50, 100], 
-                                [0+i*50, 100]], 2, 'red', 'green')
+            canvas.draw_image(image, (336 / 2, 500 / 2), (336 , 500), (25+i*50, 50), (50, 90))
 
 # create frame and add a button and labels
 frame = simplegui.create_frame("Memory", 800, 100)
 frame.add_button("Reset", new_game)
 label = frame.add_label("Turns = %d " %turn)
-
+image = simplegui.load_image('http://www.youqudian.com/upload/you/others/2014/09/20140915172747_1edazjw2.jpg')
 # register event handlers
+frame.set_canvas_background('white')
 frame.set_mouseclick_handler(mouseclick)
 frame.set_draw_handler(draw)
 
 # get things rolling
 new_game()
 frame.start()
-
 
 
