@@ -1,4 +1,5 @@
 # implementation of card game - Memory
+# run on http://www.codeskulptor.org/
 
 import simplegui
 import random
