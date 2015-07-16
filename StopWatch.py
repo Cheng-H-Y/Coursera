@@ -1,4 +1,5 @@
 # template for "Stopwatch: The Game"
+# run on http://www.codeskulptor.org/
 import simplegui
 # define global variables
 time=0
