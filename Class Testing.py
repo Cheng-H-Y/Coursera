@@ -51,10 +51,12 @@ class Hand:
 
 #####################################################
 # Student should insert code for Deck class here
-        
+class deck():
+    def __init__(self):
+        self.card=[]
 
 
-    
+
 ###################################################
 # Test code
 
