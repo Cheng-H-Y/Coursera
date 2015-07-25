@@ -35,15 +35,30 @@ class Card:
 class Hand:
     def __init__(self):
         self.card=[]
+
     def add_card(self,card):
         self.card.append(card)
+
     def __str__(self):
         s='Hand contains :'
         for i in self.card:
-            s+=(str(i),' ,')
+            s += str(i)+' ,'
         return s
 
+    def get_value(self):
+        j=0
+        have_ace=False
 
+        for i in self.card:
+            j+=VALUES[i.get_rank()]
+            if VALUES[i.get_rank()] == 1:have_ace=True
+        if not have_ace:
+            return j
+        else:
+            if j+10 < 22:
+                return j+10
+            else:
+                return j
 
 ###################################################
 
@@ -51,60 +66,110 @@ class Hand:
 
 #####################################################
 # Student should insert code for Deck class here
-class deck():
+class Deck():
     def __init__(self):
-        self.card=[]
+        self.deck_card=[]
+        for i in SUITS:
+            for j in RANKS:
+                self.deck_card.append(i+j)
+
+    def shuffle(self):
+        random.shuffle(self.deck_card)
+
+    def deal_card(self):
+        i=random.randrange(0,len(self.deck_card))
+        j=self.deck_card.pop(i)
+        return Card(j[0],j[1])
+
+    def __str__(self):
+        return str(self.deck_card)
 
 
 
 ###################################################
 # Test code
 
-test_deck = Deck()
-print test_deck
-print type(test_deck)
+c1 = Card("S", "A")
+c2 = Card("C", "2")
+c3 = Card("D", "T")
+c4 = Card("S", "K")
+c5 = Card("C", "7")
+c6 = Card("D", "A")
 
-c1 = test_deck.deal_card()
-print c1
-print type(c1)
-print test_deck
+test_hand = Hand()
+print test_hand
+print test_hand.get_value()
 
-c2 = test_deck.deal_card()
-print c2
-print type(c2)
-print test_deck
+test_hand.add_card(c2)
+print test_hand
+print test_hand.get_value()
 
-test_deck = Deck()
-print test_deck
-test_deck.shuffle()
-print test_deck
-print type(test_deck)
+test_hand.add_card(c5)
+print test_hand
+print test_hand.get_value()
 
-c3 = test_deck.deal_card()
-print c3
-print type(c3)
-print test_deck
+test_hand.add_card(c3)
+print test_hand
+print test_hand.get_value()
 
+test_hand.add_card(c4)
+print test_hand
+print test_hand.get_value()
+
+
+
+test_hand = Hand()
+print test_hand
+print test_hand.get_value()
+
+test_hand.add_card(c1)
+print test_hand
+print test_hand.get_value()
+
+test_hand.add_card(c6)
+print test_hand
+print test_hand.get_value()
+
+test_hand.add_card(c4)
+print test_hand
+print test_hand.get_value()
+
+test_hand.add_card(c5)
+print test_hand
+print test_hand.get_value()
+
+test_hand.add_card(c3)
+print test_hand
+print test_hand.get_value()
 
 
 
 ###################################################
 # Output to console
-# output of string method for decks depends on your implementation of __str__
-# note the output of shuffling is randomized so the exact order of cards
-# need not match
+# note that the string representation of a hand may vary
+# based on your implementation of the __str__ method
 
-#Deck contains CA C2 C3 C4 C5 C6 C7 C8 C9 CT CJ CQ CK SA S2 S3 S4 S5 S6 S7 S8 S9 ST SJ SQ SK HA H2 H3 H4 H5 H6 H7 H8 H9 HT HJ HQ HK DA D2 D3 D4 D5 D6 D7 D8 D9 DT DJ DQ DK 
-#<class '__main__.Deck'>
-#DK
-#<class '__main__.Card'>
-#Deck contains CA C2 C3 C4 C5 C6 C7 C8 C9 CT CJ CQ CK SA S2 S3 S4 S5 S6 S7 S8 S9 ST SJ SQ SK HA H2 H3 H4 H5 H6 H7 H8 H9 HT HJ HQ HK DA D2 D3 D4 D5 D6 D7 D8 D9 DT DJ DQ 
-#DQ
-#<class '__main__.Card'>
-#Deck contains CA C2 C3 C4 C5 C6 C7 C8 C9 CT CJ CQ CK SA S2 S3 S4 S5 S6 S7 S8 S9 ST SJ SQ SK HA H2 H3 H4 H5 H6 H7 H8 H9 HT HJ HQ HK DA D2 D3 D4 D5 D6 D7 D8 D9 DT DJ 
-#Deck contains CA C2 C3 C4 C5 C6 C7 C8 C9 CT CJ CQ CK SA S2 S3 S4 S5 S6 S7 S8 S9 ST SJ SQ SK HA H2 H3 H4 H5 H6 H7 H8 H9 HT HJ HQ HK DA D2 D3 D4 D5 D6 D7 D8 D9 DT DJ DQ DK 
-#Deck contains CT H6 C4 H9 D6 HJ D2 S5 D8 H2 ST H4 HQ HK S8 D3 CJ D5 DK DQ DA S9 S6 S2 DJ C8 SJ C9 D4 C7 SK CK S3 CA SA S4 CQ S7 HA H3 C5 D9 DT H7 HT C2 SQ H8 C6 D7 C3 H5 
-#<class '__main__.Deck'>
-#H5
-#<class '__main__.Card'>
-#Deck contains CT H6 C4 H9 D6 HJ D2 S5 D8 H2 ST H4 HQ HK S8 D3 CJ D5 DK DQ DA S9 S6 S2 DJ C8 SJ C9 D4 C7 SK CK S3 CA SA S4 CQ S7 HA H3 C5 D9 DT H7 HT C2 SQ H8 C6 D7 C3 
+#Hand contains
+#0
+#Hand contains C2
+#2
+#Hand contains C2 C7
+#9
+#Hand contains C2 C7 DT
+#19
+#Hand contains C2 C7 DT SK
+#29
+#Hand contains
+#0
+#Hand contains SA
+#11
+#Hand contains SA DA
+#12
+#Hand contains SA DA SK
+#12
+#Hand contains SA DA SK C7
+#19
+#Hand contains SA DA SK C7 DT
+#29
+
+
