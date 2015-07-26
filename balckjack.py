@@ -1,5 +1,6 @@
 # Mini-project #6 - Blackjack
 
+
 import simplegui
 import random
 
@@ -78,8 +79,15 @@ class Hand:
             else:
                 return j
 
+    def draw_card(self,canvas,pos):
+        tmppos=pos[:]
+        if len(self.card)==0:
+            return
+        for i in range(0,len(self.card)):
+            self.card[i].draw(canvas,tmppos)
+            tmppos[0] += 90
 
-# define deck class
+
 class Deck():
     def __init__(self):
         self.deck_card=[]
@@ -109,16 +117,18 @@ def deal():
         score -= 1
         in_play = False
     else:
+        deck_card=Deck()
+        player_card=Hand()
+        deal_card=Hand()
+        deck_card.shuffle()
+        deal_card.add_card(deck_card.deal_card())
+        deal_card.add_card(deck_card.deal_card())
+        player_card.add_card(deck_card.deal_card())
+        player_card.add_card(deck_card.deal_card())
+        print 'Player ' + str(player_card)
+        print 'Dealer ' + str(deal_card)
         in_play = True
 
-    deck_card=Deck()
-    player_card=Hand()
-    deal_card=Hand()
-    deck_card.shuffle()
-    deal_card.add_card(deck_card.deal_card())
-    player_card.add_card(deck_card.deal_card())
-    print 'Player ' + str(player_card)
-    print 'Dealer ' + str(deal_card)
 
 
 
@@ -139,12 +149,14 @@ def hit():
 def stand():
     global outcome1,score,in_play
     if in_play == True:
-        while deal_card.get_value()<17:
+        while deal_card.get_value()<17 :
             deal_card.add_card(deck_card.deal_card())
             print 'Dealer ' + str(deal_card) 
         if deal_card.get_value() == player_card.get_value():
             outcome1='Tied,but Dealer Win'
             score -=1
+        elif deal_card.get_value()> 21:
+            outcome1='Dealer have brusted,You Win'
         elif deal_card.get_value() > player_card.get_value():
             outcome1='Dealer Win'
             score -=1
@@ -159,12 +171,19 @@ def stand():
 def draw(canvas):
     # test to make sure that card.draw works, replace with your code below
     canvas.draw_text(outcome1,[100,50],30,'white')
-    canvas.draw_text(str(score),[500,50],30,'white')
-    card = Card("S", "A")
-    card.draw(canvas, [300, 300])
-
-
-# initialization frame
+    canvas.draw_text('Your Score:'+str(score),[100,500],30,'white')
+    player_card.draw_card(canvas, [100, 300])
+    deal_card.draw_card(canvas, [100, 100])
+    canvas.draw_text('BLACKJACK',[370,50],50,'white')
+    if in_play:
+        canvas.draw_image(card_back, CARD_BACK_CENTER, CARD_BACK_SIZE,[136,150], CARD_BACK_SIZE) 
+        outcome2='Hit Or Stand?'
+    else:
+        outcome2='New Deal?'
+        
+    canvas.draw_text(outcome2,[100,250],30,'white')
+        
+        
 frame = simplegui.create_frame("Blackjack", 600, 600)
 frame.set_canvas_background("Green")
 
@@ -177,6 +196,6 @@ frame.set_draw_handler(draw)
 
 # get things rolling
 frame.start()
-
+deal()
 
 # remember to review the gradic rubric
