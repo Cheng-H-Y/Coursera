@@ -22,23 +22,15 @@ class ImageInfo:
 
     def get_center(self):
         return self.center
-
     def get_size(self):
         return self.size
-
     def get_radius(self):
         return self.radius
-
     def get_lifespan(self):
         return self.lifespan
-
     def get_animated(self):
         return self.animated
 
-
-# art assets created by Kim Lathrop, may be freely re-used in non-commercial projects, please credit Kim
-
-# art assets created by Kim Lathrop, may be freely re-used in non-commercial projects, please credit Kim
 
 # debris images - debris1_brown.png, debris2_brown.png, debris3_brown.png, debris4_brown.png
 #                 debris1_blue.png, debris2_blue.png, debris3_blue.png, debris4_blue.png, debris_blend.png
@@ -112,8 +104,8 @@ class Ship:
         canvas.draw_image(self.image, self.image_center, self.image_size, self.pos, self.image_size,self.angle)
 
     def update(self):
-        self.vel[0]*=0.98
-        self.vel[1]*=0.98
+        self.vel[0]*=0.985
+        self.vel[1]*=0.985
         self.pos[0]+=self.vel[0]
         self.pos[0]%=WIDTH
         self.pos[1]+=self.vel[1]
@@ -122,8 +114,8 @@ class Ship:
 
         if self.thrust:
             foward=angle_to_vector(self.angle)
-            self.vel[0]+=foward[0]/15
-            self.vel[1]+=foward[1]/15
+            self.vel[0]+=foward[0]/7
+            self.vel[1]+=foward[1]/7
             ship_thrust_sound.play()
 
         else:
@@ -134,7 +126,7 @@ class Ship:
         missile_sound.rewind()
         missile_sound.play()
         shoot_forward=angle_to_vector(self.angle)
-        a_missile.change_vel([shoot_forward[0]*8,shoot_forward[1]*8])
+        a_missile.change_vel([shoot_forward[0]*8+self.vel[0],shoot_forward[1]*8+self.vel[1]])
         tmp_pos=[0,0]
         tmp_pos[0] = self.get_pos()[0]+shoot_forward[0]*45
         tmp_pos[1] = self.get_pos()[1]+shoot_forward[1]*45
@@ -176,10 +168,8 @@ class Sprite:
 
     def change_pos(self,tmp_pos):
         self.pos = tmp_pos
-
     def change_angle(self,tmp_angle):
         self.angle = tmp_angle
-
     def change_vel(self,tmp_vel):
         self.vel = tmp_vel
 
@@ -247,7 +237,7 @@ a_missile = Sprite([0,0], [0,0], 0, 0,missile_image, missile_info, missile_sound
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(keydown)
 frame.set_keyup_handler(keyup)
-timer = simplegui.create_timer(2000.0, rock_spawner)
+timer = simplegui.create_timer(1000.0, rock_spawner)
 
 # get things rolling
 timer.start()
