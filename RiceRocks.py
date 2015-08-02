@@ -1,5 +1,6 @@
 # implementation of Spaceship - program template for RiceRocks
-import simplegui
+#import simplegui  #run on http://www.codeskulptor.org/
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import math
 import random
 
@@ -325,7 +326,7 @@ def rock_spawner():
     else:pass
         
 # initialize stuff
-frame = simplegui.create_frame("Asteroids", WIDTH, HEIGHT)
+frame = simplegui.create_frame("RiceRocks", WIDTH, HEIGHT)
 
 # initialize ship and two sprites
 my_ship = Ship([WIDTH / 2, HEIGHT / 2], [0, 0], 0, ship_image, ship_info)

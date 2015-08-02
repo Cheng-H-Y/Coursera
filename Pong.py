@@ -1,6 +1,6 @@
 # Implementation of classic arcade game Pong
-# run in http://www.codeskulptor.org/
-import simplegui
+#import simplegui  #run on http://www.codeskulptor.org/
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
 
 # initialize globals - pos and vel encode vertical info for paddles

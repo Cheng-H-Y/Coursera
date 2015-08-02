@@ -1,7 +1,6 @@
 # implementation of card game - Memory
-# run on http://www.codeskulptor.org/
-
-import simplegui
+#import simplegui  #run on http://www.codeskulptor.org/
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
 card=[]
 expose=[]

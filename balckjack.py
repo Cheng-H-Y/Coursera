@@ -1,7 +1,7 @@
 # Mini-project #6 - Blackjack
 
-
-import simplegui
+#import simplegui  #run on http://www.codeskulptor.org/
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
 
 # load card sprite - 936x384 - source: jfitz.com

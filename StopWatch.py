@@ -1,6 +1,6 @@
 # template for "Stopwatch: The Game"
-# run on http://www.codeskulptor.org/
-import simplegui
+#import simplegui  #run on http://www.codeskulptor.org/
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 # define global variables
 time=0
 clock=0
