@@ -1,17 +1,19 @@
 # Mini-project #6 - Blackjack
-
-#import simplegui  #run on http://www.codeskulptor.org/
-import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+#coding=utf-8 
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
 
 # load card sprite - 936x384 - source: jfitz.com
 CARD_SIZE = (72, 96)
 CARD_CENTER = (36, 48)
-card_images = simplegui.load_image("http://storage.googleapis.com/codeskulptor-assets/cards_jfitz.png")
+card_images = simplegui.load_image("http://i3.tietuku.com/d468b98956682b2d.png")
 
 CARD_BACK_SIZE = (72, 96)
 CARD_BACK_CENTER = (36, 48)
-card_back = simplegui.load_image("http://storage.googleapis.com/codeskulptor-assets/card_jfitz_back.png")
+card_back = simplegui.load_image("http://i3.tietuku.com/9c8a85b84a567734.png")
 
 # initialize some useful global variables
 in_play = False

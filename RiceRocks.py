@@ -1,6 +1,9 @@
 # implementation of Spaceship - program template for RiceRocks
-#import simplegui  #run on http://www.codeskulptor.org/
-import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+#coding=utf-8 
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import math
 import random
 
@@ -16,6 +19,7 @@ missile_group=([])
 explosion_group=([])
 
 class ImageInfo:
+
     def __init__(self, center, size, radius = 0, lifespan = None, animated = False):
         self.center = center
         self.size = size
@@ -323,7 +327,6 @@ def rock_spawner():
         rock_avel = random.random() * .2 - .1
         tmp_rock = Sprite(rock_pos, rock_vel, 0, rock_avel, asteroid_image, asteroid_info)
         rock_group.append(tmp_rock)
-    else:pass
         
 # initialize stuff
 frame = simplegui.create_frame("RiceRocks", WIDTH, HEIGHT)

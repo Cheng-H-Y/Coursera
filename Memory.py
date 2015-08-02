@@ -1,13 +1,17 @@
 # implementation of card game - Memory
-#import simplegui  #run on http://www.codeskulptor.org/
-import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import random
+
 card=[]
 expose=[]
 state= 0
 pair_values = []
 pair_index = []
 turn=0
+
 # helper function to initialize globals
 def new_game():
     global turn,card,expose
